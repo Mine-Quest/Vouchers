@@ -12,6 +12,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class Voucher {
@@ -222,6 +223,7 @@ public class Voucher {
         ItemStack item = itemBuilder.setAmount(amount).setGlow(glowing).build();
         NBTItem nbt = new NBTItem(item);
         nbt.setString("voucher", name);
+        nbt.setUUID("uuid", UUID.randomUUID());
 
         return nbt.getItem();
     }
@@ -237,6 +239,7 @@ public class Voucher {
 
         nbt.setString("voucher", name);
         nbt.setString("argument", argument);
+        nbt.setUUID("uuid", UUID.randomUUID());
 
         return nbt.getItem();
     }

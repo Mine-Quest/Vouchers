@@ -396,6 +396,8 @@ public class ItemBuilder {
                     nbt.addCompound("EntityTag").setString("id", "minecraft:" + entityType.name());
                 }
             }
+
+            nbt.setUUID("uuid", UUID.randomUUID());
             
             return nbt.getItem();
         } else {

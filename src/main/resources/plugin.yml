@@ -4,7 +4,7 @@ main: "${group}.Vouchers"
 authors: [BadBones69, RyderBelserion]
 
 version: ${version}
-api-version: "1.19"
+api-version: "1.17"
 description: ${description}
 
 softdepend: [PlaceholderAPI]

@@ -18,7 +18,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class VoucherCommands implements CommandExecutor {
@@ -272,12 +275,21 @@ public class VoucherCommands implements CommandExecutor {
                                 argument = crazyManager.replaceRandom(args[4]);
                             }
 
-                            ItemStack item = args.length >= 5 ? voucher.buildItem(argument, amount) : voucher.buildItem(amount);
+                            List<ItemStack> items = new ArrayList<>();
+
+                            for(int i = 0; i < amount; i++) {
+                                items.add(args.length >= 5 ? voucher.buildItem(argument) : voucher.buildItem());
+                            }
 
                             if (methods.isInventoryFull(player)) {
-                                player.getWorld().dropItem(player.getLocation(), item);
+                                for(ItemStack item : items) {
+                                    player.getWorld().dropItem(player.getLocation(), item);
+                                }
                             } else {
-                                player.getInventory().addItem(item);
+                                for(ItemStack item : items) {
+                                    player.getInventory().addItem(item);
+                                }
+
                                 player.updateInventory();
                             }
 
@@ -322,13 +334,22 @@ public class VoucherCommands implements CommandExecutor {
                                 argument = crazyManager.replaceRandom(args[3]);
                             }
 
-                            ItemStack item = args.length >= 4 ? voucher.buildItem(argument, amount) : voucher.buildItem(amount);
+                            List<ItemStack> items = new ArrayList<>();
+
+                            for(int i = 0; i < amount; i++) {
+                                items.add(args.length >= 4 ? voucher.buildItem(argument) : voucher.buildItem());
+                            }
 
                             for (Player player : plugin.getServer().getOnlinePlayers()) {
                                 if (methods.isInventoryFull(player)) {
-                                    player.getWorld().dropItem(player.getLocation(), item);
+                                    for(ItemStack item : items) {
+                                        player.getWorld().dropItem(player.getLocation(), item);
+                                    }
                                 } else {
-                                    player.getInventory().addItem(item);
+                                    for(ItemStack item : items) {
+                                        player.getInventory().addItem(item);
+                                    }
+
                                     player.updateInventory();
                                 }
                             }
